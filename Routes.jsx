@@ -4,6 +4,9 @@ import Home from "./src/pages/home/Home";
 import SeachPage from "./src/pages/search/SeachPage";
 import Groups from "./src/pages/groups/Groups";
 import MakeGroup from "./src/pages/makegroup/MakeGroup";
+import Login from "./src/pages/login/Login";
+import Register from "./src/pages/register/Register";
+import Test from "./src/pages/test/Test";
 
 const router = createBrowserRouter([
     {
@@ -26,6 +29,16 @@ const router = createBrowserRouter([
                 element: <Groups></Groups>
             }
         ]
+    }, {
+        path: '/login',
+        element: <Login></Login>
+    }, {
+        path: '/register',
+        element: <Register></Register>
+    },
+    {
+        path: '/test',
+        element: <Test></Test>
     }
 ])
 

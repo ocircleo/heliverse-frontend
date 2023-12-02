@@ -21,11 +21,7 @@ const Navbar = () => {
             title: "groups",
 
         },
-        {
-            path: '/make-group',
-            title: "make group",
-
-        },
+       
     ]
 
     return (

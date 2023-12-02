@@ -7,3 +7,6 @@
 body {
   overflow-y: hidden;
 }
+bordered-text {
+ -webkit-text-stroke: 2px black;
+}
