@@ -22,7 +22,7 @@ const Card = ({ data }) => {
         }
     }, [totalSelected])
     return (
-        <div className='col-sapn-1 w-full flex items-center flex-col bg-gray-200 rounded py-5 px-3 relative overflow-clip'>
+        <div className='col-sapn-1 w-full flex items-center flex-col bg-gray-200 border-2 border-gray-300 rounded py-5 px-3 relative overflow-clip'>
             <p className={`absolute top-1 right-2  px-2 font-semibold capitalize rounded text-xs text-white ${available ? "bg-indigo-400" : "bg-red-500"}`} >{available ? "available" : 'Unavailable'}</p>
             <img src={avatar || profile} alt="" className='h-20 w-20 rounded-full' />
             <p className='capitalize font-semibold'>{first_name} {last_name}</p>
@@ -30,7 +30,7 @@ const Card = ({ data }) => {
             <p className='font-semibold'>Domain: {domain}</p>
             <p className='font-semibold' >Gender: {gender}</p>
 
-            <button onClick={addToGroup} className={` btn select-none  self-stretch  capitalize font-semibold py-1 ${alSelected ? " bg-indigo-400" : !available ? "btn-disabled bg-red-500" : "bg-gray-400"}`}>{alSelected ? "Selceted" : "Select"}</button>
+            <button onClick={addToGroup} className={`text-black border-transparent btn select-none  self-stretch  capitalize font-semibold py-1 ${alSelected ? " bg-indigo-400" : !available ? "pointer-events-none bg-red-300" : "bg-gray-400"}`}>{alSelected ? "Selceted" :!available ?"unavailable": "Select"}</button>
 
 
 

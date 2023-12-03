@@ -9,15 +9,17 @@ const Navigation = ({ page }) => {
     const [show, setShow] = useState(false)
     page = page + 1
     useEffect(() => {
-        if (currentPage + 1 == page || currentPage + 2 == page || currentPage - 1 == page || currentPage == page || Math.floor(count / 20) == page || Math.floor(count / 20) - 1 == page || Math.floor(count / 20) - 2 == page || page == 1 || page == 2) {
+        if (currentPage + 1 == page || currentPage - 1 == page || currentPage == page || Math.floor(count / 20) == page || Math.floor(count / 20) - 1 == page || page == 1 || page == 2) {
             setShow(true)
         } else {
-
             setShow(false)
         }
     }, [currentPage])
-    const query = { domain: 'null', gender: "null", available: 'null', text: "null", page: page }
+    
+    const { domain, gender, available, text } = useSelector(state => state.queryReducer)
+    const query = { domain: domain, gender: gender, available: available, text: text, page: page }
     const togglePageBtn = () => {
+
         dispatch(fetchUser(query))
         dispatch(togglePage(page))
     }

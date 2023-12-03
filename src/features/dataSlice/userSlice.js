@@ -1,17 +1,36 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 export const loginUser = createAsyncThunk("user/login", async (body) => {
-  const res = await axios.post(`https://heliverse-omega.vercel.app/api/post/login`, body);
+  const res = await axios.post(
+    `https://heliverse-omega.vercel.app/api/post/login`,
+    body
+  );
   return res.data;
 });
 export const register = createAsyncThunk("user/regiter", async (body) => {
-  const res = await axios.post(`https://heliverse-omega.vercel.app/api/post/register`, body);
+  const res = await axios.post(
+    `https://heliverse-omega.vercel.app/api/post/register`,
+    body
+  );
   return res.data;
 });
-export const autoLogin = createAsyncThunk("user/autologin", async (body) => {
-  const res = await axios.get(`https://heliverse-omega.vercel.app/`);
+export const jwt = createAsyncThunk("user/regiter", async (body) => {
+  const res = await axios.post(`https://heliverse-omega.vercel.app/jwt`, body);
   return res.data;
 });
+export const autoLogin = createAsyncThunk(
+  "user/autologin",
+  async ({ headers, data }) => {
+    const res = await axios.post(
+      `https://heliverse-omega.vercel.app/api/post/autoLogin`,
+      data,
+      {
+        headers,
+      }
+    );
+    return res.data;
+  }
+);
 const userSlice = createSlice({
   name: "user",
   initialState: {
