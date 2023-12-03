@@ -5,7 +5,7 @@ import SideBar from './components/sidebar/SideBar'
 import Navbar from './components/navbar/Navbar'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { autoLogin } from './features/dataSlice/userSlice'
+import { autoLogin, logout } from './features/dataSlice/userSlice'
 import { getGroup } from './features/dataSlice/groupSlice'
 
 function App() {
@@ -18,7 +18,10 @@ function App() {
       const headers = { authorization: `bearer ${token}` }
       const data = { email: email }
       dispatch(autoLogin({ headers, data }))
+    } else if (!user_data?.email) {
+      dispatch(logout())
     }
+
   }, [])
   useEffect(() => {
     if (user_data.email) {

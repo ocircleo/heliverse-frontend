@@ -34,7 +34,7 @@ export const autoLogin = createAsyncThunk(
 const userSlice = createSlice({
   name: "user",
   initialState: {
-    user_loading: false,
+    user_loading: true,
     user_data: {},
     user_error: null,
   },
