@@ -16,11 +16,12 @@ const SeachPage = () => {
     const reseteSelection = () => {
         dispatch(deselctAll())
     }
+    const query = { domain: 'null', gender: "null", available: 'null', text: "null", page: 1 }
     useEffect(() => {
         dispatch(fetchCount())
     }, [])
     useEffect(() => {
-        dispatch(fetchUser(currentPage))
+        dispatch(fetchUser(query))
     }, [])
 
     return (

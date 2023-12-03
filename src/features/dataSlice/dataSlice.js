@@ -1,9 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-export const fetchUser = createAsyncThunk("users/fetchuser", async (page) => {
+export const fetchUser = createAsyncThunk("users/fetchuser", async (query) => {
   const res = await axios.get(
-    `https://heliverse-omega.vercel.app/api/get/users?limit=20&page=${page}`
+    `https://heliverse-omega.vercel.app/api/get/users?domain=${query?.domain}&gender=${query?.gender}&available=${query?.available}&text=${query?.text}&limit=20&page=${query?.page}`
   );
+
   return res.data;
 });
 

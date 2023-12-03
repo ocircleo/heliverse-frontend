@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
 import { RiArrowDropDownLine } from "react-icons/ri";
-const Acordian = () => {
+const Acordian = ({ data }) => {
+    let { group_name, group_admin_email, group_admin_name, members } = data
     const [open, setOpen] = useState(false)
     return (
-        <div className='bg-gray-200 p-2 md:p-5 h-auto duration-300'>
+        <div className='bg-gray-200 p-2 md:p-5 h-auto duration-300 font-semibold'>
             <div onClick={() => setOpen(!open)} className='flex justify-between items-center cursor-pointer select-none'>
-                <p className='text-xl'>Random Group</p>
+                <h3 className='text-xl '>Group: {group_name}</h3>
                 <RiArrowDropDownLine className={`text-4xl ${open ? "rotate-180" : "rotate-0"} duration-200`} />
             </div>
             <div className={`${open ? "block" : "hidden"} duration-200`}>
-                <p>
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius unde ad dolorem, cumque maxime sit veniam voluptates iste consequatur, dignissimos ducimus. Quibusdam dolorem iure laborum quos in perferendis placeat ad.
-                </p>
-                <button className='btn btn-error'>Delete Group</button>
+
+                <p>group admin: {group_admin_name}</p>
+                <p>group admin email: {group_admin_email}</p>
+                <p>total members : {members.length + 1}</p>
+
             </div>
 
         </div>

@@ -16,8 +16,9 @@ const Navigation = ({ page }) => {
             setShow(false)
         }
     }, [currentPage])
+    const query = { domain: 'null', gender: "null", available: 'null', text: "null", page: page }
     const togglePageBtn = () => {
-        dispatch(fetchUser(page))
+        dispatch(fetchUser(query))
         dispatch(togglePage(page))
     }
 

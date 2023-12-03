@@ -1,17 +1,25 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 export const getGroup = createAsyncThunk("groups/getgroup", async (email) => {
-  const result = await axios.get();
+  const result = await axios.get(
+    `https://heliverse-omega.vercel.app/get/group/${email}`
+  );
   return result.data;
 });
 export const makeGroup = createAsyncThunk("groups/makegroup", async (body) => {
-  const result = await axios.post("url", body);
+  const result = await axios.post(
+    "https://heliverse-omega.vercel.app/post/makegroup",
+    body
+  );
   return result.data;
 });
 export const addToGroup = createAsyncThunk(
   "groups/addtogroup",
   async (body) => {
-    const result = await axios.put("url", body);
+    const result = await axios.put(
+      "https://heliverse-omega.vercel.app/put/addToGroup",
+      body
+    );
     return result.data;
   }
 );
@@ -26,7 +34,7 @@ const groupSlice = createSlice({
   name: "groups",
   initialState: {
     group_isLoading: false,
-    groups: {},
+    groups: [],
     group_error: null,
   },
   extraReducers: (builder) => {
@@ -42,7 +50,7 @@ const groupSlice = createSlice({
     builder.addCase(getGroup.rejected, (state, action) => {
       state.group_isLoading = false;
       state.group_error = action.error.message;
-      state.groups = {};
+      state.groups = [];
     });
     //Make Group
     builder.addCase(makeGroup.pending, (state) => {
@@ -52,12 +60,12 @@ const groupSlice = createSlice({
     builder.addCase(makeGroup.fulfilled, (state, action) => {
       state.group_isLoading = false;
       state.group_error = null;
-      state.groups = action.payload;
+      state.groups.push(action.payload);
     });
     builder.addCase(makeGroup.rejected, (state, action) => {
       state.group_isLoading = false;
       state.group_error = action.error.message;
-      state.groups = {};
+      state.groups = [];
     });
     //Add to Group
     builder.addCase(addToGroup.pending, (state) => {
@@ -67,12 +75,16 @@ const groupSlice = createSlice({
     builder.addCase(addToGroup.fulfilled, (state, action) => {
       state.group_isLoading = false;
       state.group_error = null;
-      state.groups = action.payload;
+      const newgroup = state.groups.filter(
+        (gr) => gr._id != action.payload._id
+      );
+      state.groups = newgroup;
+      state.groups.push(action.payload);
     });
     builder.addCase(addToGroup.rejected, (state, action) => {
       state.group_isLoading = false;
       state.group_error = action.error.message;
-      state.groups = {};
+      state.groups = [];
     });
     //Remove from Group
     builder.addCase(removeFromGroup.pending, (state) => {
@@ -87,7 +99,7 @@ const groupSlice = createSlice({
     builder.addCase(removeFromGroup.rejected, (state, action) => {
       state.group_isLoading = false;
       state.group_error = action.error.message;
-      state.groups = {};
+      state.groups = [];
     });
   },
 });

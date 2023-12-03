@@ -3,10 +3,11 @@ import { Outlet } from 'react-router-dom'
 import './App.css'
 import SideBar from './components/sidebar/SideBar'
 import Navbar from './components/navbar/Navbar'
+import { useDispatch } from 'react-redux'
+import { useEffect } from 'react'
 
 function App() {
-
-
+  
   return (
     <div>
       <SideBar>

@@ -1,22 +1,42 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import Navbar from '../../components/navbar/Navbar';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { register } from '../../features/dataSlice/userSlice';
 
 const Register = () => {
     const [show, setShow] = useState(false)
     const [error, setError] = useState(null)
-    const register = (e) => {
+    const dispatch = useDispatch()
+    const { user_data } = useSelector(state => state.userReducer)
+    const registerF = (e) => {
         e.preventDefault()
         let form = e.target;
-        let email, password;
+        let email, password, first_name, last_name, gender, domain, available;
+        first_name = form.firstName.value;
+        last_name = form.lastName.value;
         email = form.email.value;
         password = form.password.value;
-        console.log(email, password)
-
+        domain = form.domain.value;
+        gender = form.gender.value
+        available = form.available.value;
+        if (password.length < 5) {
+            setError("password must be at least 5 character");
+            return;
+        }
+        setError('')
+        const body = { email: email, password: password, first_name: first_name, last_name: last_name, gender: gender, domain: domain, available: available, avatar: "" }
+        dispatch(register(body))
     }
+    const navigate = useNavigate()
+    useEffect(() => {
+        if (user_data.email) {
+            navigate('/')
+        }
+    }, [user_data])
     return (
         <div className='h-screen overflow-y-scroll py-10'>
-            <form onSubmit={register} className='border-2 p-3 w-full  md:w-[500px] flex flex-col items-stretch rounded mx-auto'>
+            <form onSubmit={registerF} className='border-2 p-3 w-full  md:w-[500px] flex flex-col items-stretch rounded mx-auto'>
                 <h2 className='text-center font-semibold text-2xl py-2'>Please Register</h2>
 
                 <fieldset className='py-2'>
@@ -32,21 +52,36 @@ const Register = () => {
                     <input type="text" name='email' placeholder="Type here" className="input input-bordered w-full max-w-md" required />
                 </fieldset>
                 <fieldset className='py-2'>
-                    <label>Work Domain</label>
-                    <input type="text" name='domain' placeholder="Type here" className="input input-bordered w-full max-w-md" required />
+                    <label>Domain</label>
+                    <select name='domain' className="select select-bordered w-full max-w-md" required>
+                        <option value={'Sales'}>Sales</option>
+                        <option value={'Finance'}>Finance</option>
+                        <option value={'Marketing'}>Marketing</option>
+                        <option value={'IT'}>IT</option>
+                        <option value={'Management'}>Management</option>
+                        <option value={'UI Designing'}>UI Designing</option>
+                        <option value={'Business Development'}>Business Development</option>
+                    </select>
                 </fieldset>
                 <fieldset className='py-2'>
                     <label>Gender</label>
                     <select name='gender' className="select select-bordered w-full max-w-md">
-                        <option disabled selected value={null}>Who shot first?</option>
-                        <option value={'male'}>Male</option>
-                        <option value={'female'}>Female</option>
-                        <option value={'n/a'}>Rather not say</option>
+                        <option value={'Male'}>Male</option>
+                        <option value={'Female'}>Female</option>
+                        <option value={'Agender'}>Agender</option>
+                        <option value={'Bigender'}>Bigender</option>
+                        <option value={'Polygender'}>Polygender</option>
+                        <option value={'Non-binary'}>Non-binary</option>
+                        <option value={'Genderfluid'}>Genderfluid</option>
+                        <option value={'Genderqueer'}>Genderqueer</option>
                     </select>
                 </fieldset>
-                <fieldset className='py-2 flex items-center gap-2'>
-                    <input type="checkbox" name="available" className='h-4 w-4' />
-                    <label >Available Now</label>
+                <fieldset className='py-2'>
+                    <label>Availebility</label>
+                    <select name='available' className="select select-bordered w-full max-w-md">
+                        <option value={true}> Available</option>
+                        <option value={false}>Unavailable</option>
+                    </select>
                 </fieldset>
                 <fieldset className='py-2'>
                     <label>Enter Password</label>

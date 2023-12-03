@@ -1,24 +1,35 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import Navbar from '../../components/navbar/Navbar';
+import React, { useEffect, useState } from 'react';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginUser } from '../../features/dataSlice/userSlice';
+import { getGroup } from '../../features/dataSlice/groupSlice';
 
 const Login = () => {
     const [show, setShow] = useState(false)
     const [error, setError] = useState(null)
-    const login = (e) => {
+    const { user_data } = useSelector(state => state.userReducer)
+    const dispatch = useDispatch()
+    const loginU = (e) => {
         e.preventDefault()
         let form = e.target;
         let email, password;
         email = form.email.value;
         password = form.password.value;
-        console.log(email, password)
-
+        const body = { email: email, password: password }
+        dispatch(loginUser(body))
     }
+    const navigate = useNavigate()
+    useEffect(() => {
+        if (user_data.email) {
+            dispatch(getGroup(user_data.email))
+            navigate('/')
+        }
+    }, [user_data])
     return (
         <>
             <div className='h-screen w-full flex items-center justify-center'>
 
-                <form onSubmit={login} className='border-2 p-3 w-full md:w-96 flex flex-col rounded'>
+                <form onSubmit={loginU} className='border-2 p-3 w-full md:w-96 flex flex-col rounded'>
                     <h2 className='text-center font-semibold text-2xl py-2'>Please login</h2>
                     <fieldset className='py-2'>
                         <label>Enter Email</label>

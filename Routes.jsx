@@ -7,6 +7,7 @@ import MakeGroup from "./src/pages/makegroup/MakeGroup";
 import Login from "./src/pages/login/Login";
 import Register from "./src/pages/register/Register";
 import Test from "./src/pages/test/Test";
+import PrivateRoute from "./src/privateroute/PrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -26,7 +27,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/groups',
-                element: <Groups></Groups>
+                element: <PrivateRoute><Groups></Groups></PrivateRoute>
             }
         ]
     }, {
