@@ -18,6 +18,7 @@ const Login = () => {
         const body = { email: email, password: password }
         dispatch(loginUser(body))
         console.log("clicking")
+        console.log(user_data)
     }
     const navigate = useNavigate()
     useEffect(() => {

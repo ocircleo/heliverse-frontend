@@ -2,13 +2,13 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 export const getGroup = createAsyncThunk("groups/getgroup", async (email) => {
   const result = await axios.get(
-    `https://heliverse-omega.vercel.app/get/group/${email}`
+    `https://heliverse-omega.vercel.app/api/get/group/${email}`
   );
   return result.data;
 });
 export const makeGroup = createAsyncThunk("groups/makegroup", async (body) => {
   const result = await axios.post(
-    "https://heliverse-omega.vercel.app/post/makegroup",
+    "https://heliverse-omega.vercel.app/api/post/makegroup",
     body
   );
   return result.data;
@@ -17,7 +17,7 @@ export const addToGroup = createAsyncThunk(
   "groups/addtogroup",
   async (body) => {
     const result = await axios.put(
-      "https://heliverse-omega.vercel.app/put/addToGroup",
+      "https://heliverse-omega.vercel.app/api/put/addToGroup",
       body
     );
     return result.data;
