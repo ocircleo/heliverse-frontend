@@ -17,10 +17,12 @@ const Login = () => {
         password = form.password.value;
         const body = { email: email, password: password }
         dispatch(loginUser(body))
+        console.log("clicking")
     }
     const navigate = useNavigate()
     useEffect(() => {
         if (user_data.email) {
+            console.log("navigat")
             dispatch(getGroup(user_data.email))
             navigate('/')
         }
