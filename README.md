@@ -9,7 +9,7 @@ Live website link : https://classy-heliotrope-fcedc7.netlify.app/
 - users can make a group and add new users to group
 
 
-## To the viewr 
+## To the viwer 
 Due to insufficeint time, an good doc and 404 page was not 
 created. also some cleanup of the code is required.
 - please consider this
